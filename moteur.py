@@ -13,8 +13,16 @@ M2_EN = 18
 M2_IN1 = 23
 M2_IN2 = 24
 
+M3_EN = 26
+M3_IN1 = 19
+M3_IN2 = 13
+
+M4_EN = 17
+M4_IN1 = 22
+M4_IN2 = 27
+
 # Tableau afin de regrouper les pins par moteur
-Pins = [[M1_EN, M1_IN1, M1_IN2], [M2_EN, M2_IN1, M2_IN2]]
+Pins = [[M1_EN, M1_IN1, M1_IN2], [M2_EN, M2_IN1, M2_IN2], [M3_EN, M3_IN1, M3_IN2], [M4_EN, M4_IN1, M4_IN2]]
 
 # Démarrage
 GPIO.setmode(GPIO.BCM)
@@ -28,12 +36,24 @@ GPIO.setup(M2_EN, GPIO.OUT)
 GPIO.setup(M2_IN1, GPIO.OUT)
 GPIO.setup(M2_IN2, GPIO.OUT)
 
+GPIO.setup(M3_EN, GPIO.OUT)
+GPIO.setup(M3_IN1, GPIO.OUT)
+GPIO.setup(M3_IN2, GPIO.OUT)
+
+GPIO.setup(M4_EN, GPIO.OUT)
+GPIO.setup(M4_IN1, GPIO.OUT)
+GPIO.setup(M4_IN2, GPIO.OUT)
+
 frequence = 100         # À voir avec le moteur
 rapportCyclique = 100   # À voir avec le moteur
 M1_vitesse = GPIO.PWM(M1_EN, frequence)
 M2_vitesse = GPIO.PWM(M2_EN, frequence)
+M3_vitesse = GPIO.PWM(M3_EN, frequence)
+M4_vitesse = GPIO.PWM(M4_EN, frequence)
 M1_vitesse.start(rapportCyclique)
 M2_vitesse.start(rapportCyclique)
+M3_vitesse.start(rapportCyclique)
+M4_vitesse.start(rapportCyclique)
 
 def tournerSens1(moteurNum):
     GPIO.output(Pins[moteurNum - 1][1], GPIO.HIGH)
