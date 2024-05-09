@@ -1,4 +1,5 @@
-import { StyleSheet, View,TouchableOpacity,Text,WebView} from 'react-native';
+import { StyleSheet, View,TouchableOpacity,Text} from 'react-native';
+import {WebView} from 'react-native-webview';
 
 
 
@@ -14,57 +15,30 @@ import React from 'react';
 
 export default function App() {
 
-    const Ipadress = '312';
+    const Ipadress = '192.168.2.107:19001';
 
 
 
 
 
-    return(
-
-        <View style={{
-
-            flex: 1.5,
-
-            justifyContent: 'center',
-
-            alignItems: 'center',
-
-            backgroundColor: 'black',
-
-        }}>
-
-            <View style={{ width: 240, height: 320 }}>
-
+    return (
+        <View style={{ flex: 1.5, backgroundColor: 'black', alignItems: 'center', justifyContent: 'center' }}>
+            <View style={{ width: 340, height: 540 }}>
                 <WebView
-
                     automaticallyAdjustContentInsets={true}
-
                     scalesPageToFit={true}
-
                     startInLoadingState={false}
-
                     scrollEnabled={false}
-
-                    source={{uri: `http://${Ipadress}/stream/video.mjpeg`}}
-
+                    source={{ uri: `http://192.168.2.107:19001/stream/video.mjpeg` }}
                 />
-
-
-
             </View>
-
-            <View style={styles.container}>
-
+            <View style={{ position: 'absolute', bottom: 20 }}>
                 <CrossButtonLayout pad />
-
-
-
             </View>
-
         </View>
-
     );
+
+
 
 
 
@@ -74,19 +48,14 @@ const sendCommandToPi = async (command) => {
 
     try {
 
-        const response = await fetch('http://${Ipadress}:190001/command', {
-
+        const response = await fetch(`http://${Ipadress}:190001/command`, {
             method: 'POST',
-
             headers: {
-
                 'Content-Type': 'application/json',
-
             },
-
-            body: JSON.stringify({command }),
-
+            body: JSON.stringify({ command }),
         });
+
 
         const data = await response.text();
 
@@ -100,21 +69,14 @@ const sendCommandToPi = async (command) => {
 
 };
 
-const CustomButton = ({ title,  command }) => {
-
+const CustomButton = ({ title, command }) => {
     return (
-
         <TouchableOpacity onPress={() => sendCommandToPi(command)} style={styles.button}>
-
             <Text style={styles.buttonText}>{title}</Text>
-
-
-
         </TouchableOpacity>
-
     );
-
 };
+
 
 
 
@@ -126,7 +88,7 @@ const CrossButtonLayout = () => {
 
             <View style={styles.row}>
 
-                <CustomButton up title = "▲"  ommand = "up" />
+                <CustomButton up title = "▲"  command = "up" />
 
             </View>
 
@@ -188,7 +150,6 @@ const styles = StyleSheet.create({
 
     column: {
 
-        flex: 1,
 
         alignItems: 'center',
 
@@ -196,7 +157,7 @@ const styles = StyleSheet.create({
 
     spaceBetween: {
 
-        marginHorizontal: 10, // Adjust the value as needed
+        marginHorizontal: 70, // Adjust the value as needed
 
         marginVertical : 10,
 
@@ -206,7 +167,7 @@ const styles = StyleSheet.create({
 
         backgroundColor: 'blue',
 
-        paddingVertical: 30,
+        paddingVertical: 22.5,
 
         paddingHorizontal: 40,
 
