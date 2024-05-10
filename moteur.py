@@ -3,15 +3,16 @@
 # Lien intéressant : https://www.raspberrypi.com/documentation/computers/raspberry-pi.html
 
 import RPi.GPIO as GPIO
+from time import sleep
 
 # Definition des pins
-M1_EN = 21
-M1_IN1 = 20
-M1_IN2 = 16
+M1_EN = 25
+M1_IN1 = 8
+M1_IN2 = 7
 
 M2_EN = 18
-M2_IN1 = 23
-M2_IN2 = 24
+M2_IN1 = 14
+M2_IN2 = 15
 
 M3_EN = 26
 M3_IN1 = 19
@@ -55,19 +56,17 @@ M2_vitesse.start(rapportCyclique)
 M3_vitesse.start(rapportCyclique)
 M4_vitesse.start(rapportCyclique)
 
-def tournerSens1(moteurNum):
-    GPIO.output(Pins[moteurNum - 1][1], GPIO.HIGH)
-    GPIO.output(Pins[moteurNum - 1][2], GPIO.LOW)
 
-
-def tournerSens2(moteurNum):
+def sens1(moteurNum):
     GPIO.output(Pins[moteurNum - 1][1], GPIO.LOW)
     GPIO.output(Pins[moteurNum - 1][2], GPIO.HIGH)
-
-
-def avancer(moteurNum):
+    # print("Moteur", moteurNum, "tourne dans le sens 1.")
+    
+    
+def sens2(moteurNum):
     GPIO.output(Pins[moteurNum - 1][1], GPIO.HIGH)
-    GPIO.output(Pins[moteurNum - 1][2], GPIO.HIGH)
+    GPIO.output(Pins[moteurNum - 1][2], GPIO.LOW)
+    # print("Moteur", moteurNum, "tourne dans le sens 2.")
 
 
 def arreter(moteurNum):
@@ -75,15 +74,61 @@ def arreter(moteurNum):
     GPIO.output(Pins[moteurNum - 1][2], GPIO.LOW)
 
 
-def avancerTout():
-    avancer(1)
-    avancer(2)
-    avancer(3)
-    avancer(4)
+def avancer():
+    sens1(1)
+    sens1(2)
+    sens2(3)
+    sens2(4)
+    # print("Bolide avance")
 
+def reculer():
+    sens2(1)
+    sens2(2)
+    sens1(3)
+    sens1(4)
+    # print("Bolide recule")
+    
+def avantGauche():
+    arreter(1)
+    sens1(2)
+    sens2(3)
+    sens2(4) 
+    
+    
+def avantDroite():
+    sens1(1)
+    arreter(2)
+    sens2(3)
+    sens2(4) 
+    
+
+def reculerGauche():
+    sens2(1)
+    sens2(2)
+    sens1(3)
+    arreter(4)    
+
+
+def reculerDroite():
+    sens2(1)
+    sens2(2)
+    arreter(3)
+    sens1(4)
+    
 
 def arreterTout():
     arreter(1)
     arreter(2)
     arreter(3)
     arreter(4)
+    # print("Moteurs arretes.")
+
+arreterTout()
+    
+while True :
+    # Exemple de motif de boucle
+    reculerDroite()
+    sleep(10)
+    arreterTout()
+    sleep(5)
+
