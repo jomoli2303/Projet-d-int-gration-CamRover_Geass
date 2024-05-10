@@ -1,3 +1,5 @@
+//Code pour le Webview inspire de https://github.com/oskaerik/robot-control/blob/master/reactnative/components/camera/Camera.js
+
 import { StyleSheet, View,TouchableOpacity,Text} from 'react-native';
 import {WebView} from 'react-native-webview';
 
