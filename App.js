@@ -17,7 +17,7 @@ import React from 'react';
 
 export default function App() {
 
-    const Ipadress = '192.168.2.107:19001';
+    const Ipadress = '192.168.2.107';
 
 
 
@@ -50,7 +50,7 @@ const sendCommandToPi = async (command) => {
 
     try {
 
-        const response = await fetch(`http://${Ipadress}:190001/command`, {
+        const response = await fetch(`http://192.168.2.107:190001/command`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
