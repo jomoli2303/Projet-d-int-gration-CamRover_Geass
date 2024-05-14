@@ -2,7 +2,7 @@
 
 import { StyleSheet, View,TouchableOpacity,Text} from 'react-native';
 import {WebView} from 'react-native-webview';
-
+import socket from 'socket.io-client';
 
 
 
@@ -45,23 +45,20 @@ export default function App() {
 
 
 }
+constructor(props); {
+    super(props);
 
-const sendCommandToPi = async (command) => {
+    // Connect to server
+    this.socket = socket('192.168.0.106:3000', { transports: ['websocket'] });
+    this.socket.on('connect', (socket) => {
+        console.log("Connected to server");
+    });}
+
+const sendCommandToPi =  (command) => {
 
     try {
-
-        const response = await fetch(`http://192.168.2.107:190001/command`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ command }),
-        });
-
-
-        const data = await response.text();
-
-        console.log(data);
+        this.socket.emit('buttonPress', command);
+       
 
     } catch (error) {
 
