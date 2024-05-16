@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { WebView } from 'react-native-webview';
-import { io } from "socket.io-client";
+import socketIO from 'socket.io-client';
 import Orientation from 'react-native-orientation-locker';
 
 
