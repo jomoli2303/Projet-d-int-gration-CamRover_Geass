@@ -2,12 +2,15 @@ import React, { useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { WebView } from 'react-native-webview';
 import socketIO from 'socket.io-client';
+import Orientation from 'react-native-orientation-locker';
+
 
 const IPAddress = '';
 
 const App = () => {
     // Initialize socket connection
     useEffect(() => {
+        Orientation.lockToPortrait();
         const socket = socketIO('http://:3000', { transports: ['websocket'] });
 
         socket.on('connect', () => {
@@ -23,8 +26,6 @@ const App = () => {
             }
         };
 
-        // Expose the sendCommandToPi function to be used in CustomButton
-        App.sendCommandToPi = sendCommandToPi;
 
         // Cleanup socket connection on component unmount
         return () => {
@@ -68,18 +69,18 @@ const CrossButtonLayout = () => {
     return (
         <View style={styles.container}>
             <View style={styles.row}>
-                <CustomButton title="▲" command="up" />
+                <CustomButton title="▲" command="up" sendCommandToPi={sendCommandToPi} />
             </View>
             <View style={styles.centerRow}>
                 <View style={[styles.column, styles.spaceBetween]}>
-                    <CustomButton title="◀" command="left" />
+                    <CustomButton title="◀" command="left" sendCommandToPi={sendCommandToPi}/>
                 </View>
                 <View style={[styles.column, styles.spaceBetween]}>
-                    <CustomButton title="▶" command="right" />
+                    <CustomButton title="▶" command="right" sendCommandToPi={sendCommandToPi} />
                 </View>
             </View>
             <View style={styles.row}>
-                <CustomButton title="▼" command="down" />
+                <CustomButton title="▼" command="down" sendCommandToPi={sendCommandToPi}/>
             </View>
         </View>
     );
