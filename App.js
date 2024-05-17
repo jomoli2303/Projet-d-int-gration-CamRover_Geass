@@ -4,14 +4,14 @@ import { WebView } from 'react-native-webview';
 import socketIO from 'socket.io-client';
 
 
-const IPAddress = '';
+const IPAddress = '10.0.0.35';
 
 const App = () => {
     // Initialize socket connection
     useEffect(() => {
-        const socket = socketIO('http://:3000', { transports: ['websocket'] });
+        const socket = socketIO('10.0.0.35:3000', { transports: ['websocket'] });
 
-        socket.on('connect', () => {
+        socket.on('connect', (socket) => {
             console.log("Connected to server");
         });
 
@@ -39,7 +39,7 @@ const App = () => {
                     scalesPageToFit={true}
                     startInLoadingState={false}
                     scrollEnabled={false}
-                    source={{ uri: 'http://:8080/stream/video.mjpeg' }}
+                    source={{ uri: 'http://10.0.0.35:8080/stream/video.mjpeg' }}
                 />
             </View>
             <View style={{ position: 'absolute', bottom: 20 }}>
