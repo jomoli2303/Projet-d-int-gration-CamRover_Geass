@@ -126,12 +126,7 @@ def arreterTout():
 
 arreterTout()
     
-while True :
-    # Exemple de motif de boucle
-    reculerDroite()
-    sleep(10)
-    arreterTout()
-    sleep(5)
+
 # Create a Socket.IO client
 
 sio = socketio.Client()
@@ -150,23 +145,31 @@ def command(data):
     # Execute the command on the Raspberry Pi (implement your logic here)
     if data == 'up':
         # Code to move the robot forward
-        pass
+        avancer()
+        
     elif data == 'down':
+        reculer()
         # Code to move the robot backward
-        pass
+        
     elif data == 'left':
+        avantGauche()
         # Code to turn the robot left
-        pass
+        
     elif data == 'right':
+        avantDroite()
         # Code to turn the robot right
-        pass
+        
     else:
+        arreterTout()
         # Stop motors or handle any other default action
-        pass
+        
 
 # Connect to the Node.js WebSocket server
 sio.connect('http://localhost:8081')
 
 # Keep the script running
 sio.wait()
+
+import atexit
+atexit.register(GPIO.cleanup)
 
