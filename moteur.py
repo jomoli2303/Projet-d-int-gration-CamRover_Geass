@@ -131,4 +131,41 @@ while True :
     sleep(10)
     arreterTout()
     sleep(5)
-
+# Create a Socket.IO client
+sio = socketio.Client()
+ 
+@sio.event
+def connect():
+    print('Connected to Node.js server')
+ 
+@sio.event
+def disconnect():
+    print('Disconnected from Node.js server')
+ 
+@sio.event
+def command(data):
+    print('Received command:', data)
+    # Execute the command on the Raspberry Pi (implement your logic here)
+    switch(data) {
+            case 'forward':
+                // Code to move the robot forward
+                break;
+            case 'backward':
+                // Code to move the robot backward
+                break;
+            case 'left':
+                // Code to turn the robot left
+                break;
+            case 'right':
+                // Code to turn the robot right
+                break;
+            // Add more cases for additional buttons as needed
+            default:
+                // Stop motors
+        } 
+ 
+# Connect to the Node.js WebSocket server
+sio.connect('http://localhost:8081')
+ 
+# Keep the script running
+sio.wait()
