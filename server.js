@@ -7,6 +7,8 @@ const server = http.createServer(app);
 const io = socketIO(server);
 
 const port = 3000; // Port for Node.js server
+const pythonSocket = require('socket.io-client')('http://localhost:8081');
+
 
 // WebSocket communication
 io.on('connection', (socket) => {
