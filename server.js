@@ -14,23 +14,9 @@ io.on('connection', (socket) => {
 
     socket.on('buttonPress', (button) => {
         console.log('Button pressed:', button);
-        switch(button) {
-            case 'forward':
-                // Code to move the robot forward
-                break;
-            case 'backward':
-                // Code to move the robot backward
-                break;
-            case 'left':
-                // Code to turn the robot left
-                break;
-            case 'right':
-                // Code to turn the robot right
-                break;
-            // Add more cases for additional buttons as needed
-            default:
-                // Stop motors
-        }    });
+        pythonSocket.emit('command', button);
+
+    });
 
     socket.on('disconnect', () => {
         console.log('A client disconnected');
