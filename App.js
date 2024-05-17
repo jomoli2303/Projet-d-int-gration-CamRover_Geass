@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { WebView } from 'react-native-webview';
 import socketIO from 'socket.io-client';
-import Orientation from 'react-native-orientation-locker';
 
 
 const IPAddress = '';
@@ -10,7 +9,6 @@ const IPAddress = '';
 const App = () => {
     // Initialize socket connection
     useEffect(() => {
-        Orientation.lockToPortrait();
         const socket = socketIO('http://:3000', { transports: ['websocket'] });
 
         socket.on('connect', () => {
