@@ -1,3 +1,5 @@
+//Code pour les Websocket et la caméra inspiré de : https://github.com/oskaerik/robot-control
+
 import React, { useEffect } from 'react';
 import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import { WebView } from 'react-native-webview';
