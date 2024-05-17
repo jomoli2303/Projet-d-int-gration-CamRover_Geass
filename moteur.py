@@ -142,7 +142,6 @@ def disconnect():
 @sio.event
 def command(data):
     print('Received command:', data)
-    # Execute the command on the Raspberry Pi (implement your logic here)
     if data == 'up':
         # Code to move the robot forward
         avancer()
